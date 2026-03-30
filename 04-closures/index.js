@@ -11,6 +11,18 @@
 //      counter() → 3
 
 // your code here
+function counter() {
+    let count = 0
+    return function(){
+        //const count = 0
+        return ++count
+    };
+}
+
+const startCount = counter()
+console.log(startCount())
+console.log(startCount())
+console.log(startCount())
 
 // ─────────────────────────────────────────────
 // 2. Make a multiplier factory
@@ -21,6 +33,16 @@
 //      triple(10) → 30
 
 // your code here
+
+function multiplyBy(n){
+    return function(y){
+        return n * y
+    }
+}
+
+const triple = multiplyBy(3)
+console.log(triple(5)) 
+console.log(triple(10))
 
 // ─────────────────────────────────────────────
 // 3. Make a greeting factory
