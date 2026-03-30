@@ -29,15 +29,16 @@ console.log(products.filter(({price}) => (price >20 )).map(({name,price}) => (na
 //    Expected: → 98
 
 // your code here
-console.log(products.reduce((acc,price.price) => acc + price))
-
+console.log(products.map(({price}) => (price)).reduce((acc, cur) => acc + cur))
 // ─────────────────────────────────────────────
 // 4. Count how many words have more than 5 characters
 //    Expected: → 3
 const words = ["apple", "banana", "kiwi", "strawberry", "fig", "blueberry"]
 
 // your code here
+console.log(words.map((word) =>(word.length > 5)))
 
+console.log(words.map((word) =>(word.length > 5)).filter(Boolean).length)
 // ─────────────────────────────────────────────
 // 5. Get the average age of users over 18
 //    Use filter AND reduce together
@@ -50,3 +51,7 @@ const users = [
 ]
 
 // your code here
+const average = array => array.reduce((a, b) => a + b) / array.length;
+const over18Ages = users.filter(({age}) => age > 18).map(({age}) => age)
+
+console.log(average(over18Ages))
