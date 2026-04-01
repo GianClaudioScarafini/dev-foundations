@@ -1,0 +1,35 @@
+{
+  "jobs": [
+    {
+      "id": 1,
+      "title": "Frontend Developer",
+      "company": "Acme Corp",
+      "location": "Remote",
+      "salary": "£50k–£65k",
+      "description": "Build great UIs with React and TypeScript. You will own the component library and lead frontend architecture decisions.",
+      "tags": ["React", "TypeScript", "CSS"],
+      "postedAt": "2024-03-20T10:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "title": "Backend Engineer",
+      "company": "BuildFast Ltd",
+      "location": "London",
+      "salary": "£60k–£80k",
+      "description": "Design and build REST APIs with Node.js and PostgreSQL. Experience with Docker and CI/CD a plus.",
+      "tags": ["Node.js", "PostgreSQL", "Docker"],
+      "postedAt": "2024-03-22T09:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "title": "Full Stack Developer",
+      "company": "StartupXYZ",
+      "location": "Manchester",
+      "salary": "£45k–£60k",
+      "description": "Own features end to end. Small team, fast delivery, modern stack.",
+      "tags": ["React", "Node.js", "MongoDB"],
+      "postedAt": "2024-03-24T11:00:00.000Z"
+    }
+  ],
+  "applications": []
+}
