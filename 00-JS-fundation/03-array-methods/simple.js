@@ -9,7 +9,8 @@
 const numbers = [1, 2, 3, 4, 5]
 
 // your code here
-
+console.log("1. map — transform every element")
+console.log(numbers.map((n)=>n*2))
 
 // ─────────────────────────────────────────────
 // 2. filter — keep matching elements
@@ -17,7 +18,8 @@ const numbers = [1, 2, 3, 4, 5]
 //    [1, 2, 3, 4, 5, 6] → [2, 4, 6]
 
 // your code here
-
+console.log("2. filter — keep matching elements")
+console.log(numbers.filter((num) => num % 2 === 0))
 
 // ─────────────────────────────────────────────
 // 3. find — get the first match
@@ -30,7 +32,11 @@ const users = [
   { name: "Carol", age: 28 }
 ]
 
+
+
 // your code here
+console.log("3. find — get the first match")
+console.log(users.find(({age})=>age>25))
 
 
 // ─────────────────────────────────────────────
@@ -41,7 +47,8 @@ const users = [
 const scores = [70, 85, 92, 60]
 
 // your code here
-
+console.log("4. some — does at least one match?")
+console.log(scores.some(number => number > 90))
 
 // ─────────────────────────────────────────────
 // 5. every — do all match?
@@ -52,7 +59,8 @@ const scores = [70, 85, 92, 60]
 const prices = [10, 5, 8, 3]
 
 // your code here
-
+console.log("5. every — do all match?")
+console.log(prices.every(number => number > 0))
 
 // ─────────────────────────────────────────────
 // 6. includes and indexOf
@@ -63,6 +71,10 @@ const prices = [10, 5, 8, 3]
 const fruits = ["apple", "banana", "cherry", "mango"]
 
 // your code here
+console.log("6. includes and indexOf")
+console.log(fruits.includes("banana"))
+console.log(fruits.indexOf("cherry"))
+console.log("What does indexOf return if not found? ===> -1")
 
 
 // ─────────────────────────────────────────────
@@ -71,6 +83,8 @@ const fruits = ["apple", "banana", "cherry", "mango"]
 //    Expected: ["Alice", "Bob", "Carol"]
 
 // your code here
+console.log("7. map with objects")
+console.log(users.map(({name}) => name))
 
 
 // ─────────────────────────────────────────────
@@ -79,3 +93,6 @@ const fruits = ["apple", "banana", "cherry", "mango"]
 //    Expected: ["Bob", "Carol"]
 
 // your code here
+
+console.log("8. filter + map together")
+console.log(users.filter(({age}) => age > 25).map(({name})=>name))
