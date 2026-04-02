@@ -45,8 +45,16 @@ const products = [
 ]
 
 // your code here
-console.log(Object.groupBy(products, ({ category }) => category))
-
+console.log("// 3. reduce — group by property")
+console.log(products.reduce(groupby,{}))
+function groupby(acc, cur) {
+  if (acc[cur]) {         // key already exists in acc?
+    acc[cur] = acc[cur] + 1  // increment it
+  } else {
+    acc[cur] = 1          // first time seeing it
+  }
+  return acc              // always return the accumulator
+}
 // ─────────────────────────────────────────────
 // 4. sort — numbers
 //    JS sort() is alphabetical by default — it's broken for numbers.
@@ -114,6 +122,9 @@ console.log(flatMap.flatMap((num)=>[num,num]))
 
 // your code here (one chain)
 
+console.log("// 7. Method chaining — pipeline")
+console.log(products.filter(({price}) => price <1.5).map(({name})=>name).sort())
+
 
 // ─────────────────────────────────────────────
 // 8. findIndex vs find
@@ -122,4 +133,10 @@ console.log(flatMap.flatMap((num)=>[num,num]))
 //    c) What's the difference between find and findIndex?
 
 // your code + answers here
-
+console.log("// 8. findIndex vs find")
+console.log("a")
+console.log(products.filter(({price}) => price <1.5)[0])
+console.log("b")
+console.log("-1")
+console.log("c")
+//find find the value of the iterator the other return the value by index
