@@ -5,8 +5,10 @@
 // 1. reduce — sum
 //    Sum all numbers. Start accumulator at 0.
 //    [1, 2, 3, 4, 5] → 15
-
+var numbers = [1, 2, 3, 4, 5]
 // your code here
+console.log("// 1. reduce — sum")
+console.log(numbers.reduce((acc,cur) => acc +cur))
 
 
 // ─────────────────────────────────────────────
@@ -18,6 +20,17 @@ const basket = ["apple", "banana", "apple", "cherry", "apple", "banana"]
 
 // your code here
 
+console.log(basket.reduce(countStrg, {}));
+//                                   ^^ initial value: start with empty object
+
+function countStrg(acc, cur) {
+  if (acc[cur]) {         // key already exists in acc?
+    acc[cur] = acc[cur] + 1  // increment it
+  } else {
+    acc[cur] = 1          // first time seeing it
+  }
+  return acc              // always return the accumulator
+}
 
 // ─────────────────────────────────────────────
 // 3. reduce — group by property
@@ -32,7 +45,7 @@ const products = [
 ]
 
 // your code here
-
+console.log(Object.groupBy(products, ({ category }) => category))
 
 // ─────────────────────────────────────────────
 // 4. sort — numbers
@@ -41,8 +54,20 @@ const products = [
 //    [10, 1, 21, 3, 100, 5] → [1, 3, 5, 10, 21, 100]
 
 const nums = [10, 1, 21, 3, 100, 5]
+const copy = [...nums].sort(ascending)
+const copy2 = [...nums].sort(descending)
 
+function ascending(a,b){
+  return a-b
+}
+function descending(a,b){
+  return b-a
+}
 // your code here (don't mutate nums)
+console.log(nums)
+console.log(copy)
+console.log(copy2)
+// console.log(nums)
 
 
 // ─────────────────────────────────────────────
@@ -56,7 +81,9 @@ const users = [
 ]
 
 // your code here
-
+console.log(users)
+const newusers = [...users]
+console.log(newusers.sort((a,b)=>a.age-b.age))
 
 // ─────────────────────────────────────────────
 // 6. flat and flatMap
@@ -68,6 +95,13 @@ const users = [
 //       [1, 2, 3] → [1, 1, 2, 2, 3, 3]
 
 // your code here
+console.log("6. flat and flatMap")
+var flatonelevel = [[1, 2], [3, 4], [5]]
+console.log(flatonelevel.flat())
+var FlattenTwoLevels =[1, [2, [3, [4]]]]
+console.log(FlattenTwoLevels.flat(3))
+var flatMap =[1, 2, 3]
+console.log(flatMap.flatMap((num)=>[num,num]))
 
 
 // ─────────────────────────────────────────────
@@ -88,3 +122,4 @@ const users = [
 //    c) What's the difference between find and findIndex?
 
 // your code + answers here
+
