@@ -53,8 +53,17 @@ console.log(triple(10))
 //      sayHello("Bob")   → "Hello, Bob!"
 
 // your code here
+console.log("// 3. Make a greeting factory")
+function greet(x){
+    return function(y){
+        return x+", "+y+"!"
+    }
+}
 
 
+     const sayHello = greet("Hello")
+     console.log(sayHello("Alice"))              //→ "Hello, Alice!"
+     console.log(sayHello("Bob")  )              //→ "Hello, Bob!"
 
 // ─────────────────────────────────────────────
 // 4. Make a once() function
@@ -63,6 +72,25 @@ console.log(triple(10))
 //    Expected:
 //      const init = once(() => "initialised!")
 //      init() → "initialised!"
-//      init() → "initialised!"  ← same result, fn not called again
+//      init() → "initialised!"                     \\ ← same result, fn not called again
 
 // your code here
+
+console.log("// 4. Make a once() function")
+    const init = once(() => "initialised!")
+    console.log(init()) 
+    console.log(init())
+    console.log(init())  
+
+function once(callback) {
+    let called = false 
+    let result
+
+    return function() {
+        if (!called) {
+        called = true
+        result = callback()   // how do you RUN callback and capture what it returns?
+        }
+        return result
+    }
+}
