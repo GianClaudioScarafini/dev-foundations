@@ -48,7 +48,7 @@ const products = [
 console.log("// 3. reduce — group by property")
 console.log(products.reduce(groupby,{}))
 function groupby(acc, cur) {
-  if (acc[cur]) {         // key already exists in acc?
+  if (acc.category) {         // key already exists in acc?
     acc[cur] = acc[cur] + 1  // increment it
   } else {
     acc[cur] = 1          // first time seeing it
