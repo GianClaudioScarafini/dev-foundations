@@ -18,7 +18,9 @@ const user = {
 }
 
 // your code here
-
+console.log(user.address.city)
+console.log(user.tags[1])
+console.log(user.address.zip)
 
 // ─────────────────────────────────────────────
 // 2. Safe nested access (optional chaining)
@@ -28,7 +30,8 @@ const user = {
 //    b) user.address?.country?.code
 
 // your code here
-
+console.log(user.company?.name === undefined? "not found":user.company?.name)
+console.log(user.address?.country?.code=== undefined? "not found":user.address?.country?.code)
 
 // ─────────────────────────────────────────────
 // 3. Merge with override
@@ -39,7 +42,8 @@ const user = {
 //    Expected: { color: "red", size: "lg", border: true }
 
 // your code here
-
+const defaults = { color: "blue", size: "md", border: true }
+const options  = { color: "red", size: "lg" }
 
 // ─────────────────────────────────────────────
 // 4. Transform object values
@@ -49,8 +53,14 @@ const user = {
 //    Hint: Object.entries + reduce, or Object.fromEntries
 
 // your code here
-
-
+console.log("// 4. Transform object values")
+const prices = { coffee: 3, tea: 2, juice: 4 }
+console.log(prices)
+const pricesCopy = {...prices}
+for (const[key,value] of Object.entries(pricesCopy)){
+    pricesCopy[key] = [key,value].reduce((_,cur)=>cur *2)
+}
+console.log(pricesCopy)
 // ─────────────────────────────────────────────
 // 5. Filter object keys
 //    Keep only entries where value > 3
@@ -58,7 +68,12 @@ const user = {
 //    Expected: { apple: 5, mango: 4 }
 
 // your code here
+console.log("// 5. Filter object keys")
+const stock = { apple: 5, banana: 1, mango: 4, grape: 2 }
+const stockToFilter = {...stock}
+console.log(Object.fromEntries(Object.entries(stockToFilter).filter(([_,v]) =>v>3)))
 
+//(n=> n%2===0).map(n=>n*2)
 
 // ─────────────────────────────────────────────
 // 6. Group an array into an object
@@ -72,7 +87,9 @@ const people = [
 ]
 
 // your code here
-
+console.log("// 6. Group an array into an object")
+var result = Object.groupBy(people,({name})=>name)
+console.log(result)
 
 // ─────────────────────────────────────────────
 // 7. Count occurrences
@@ -81,3 +98,16 @@ const people = [
 //    Expected: { apple: 3, banana: 2, cherry: 1 }
 
 // your code here
+console.log("// 7. Count occurrences")
+const words = ["apple", "banana", "apple", "cherry", "banana", "apple"]
+
+console.log(words.reduce(countStrg,{}))
+
+function countStrg(acc, cur) {
+  if (acc[cur]) {         // key already exists in acc?
+    acc[cur] = acc[cur] + 1  // increment it
+  } else {
+    acc[cur] = 1          // first time seeing it
+  }
+  return acc              // always return the accumulator
+}
