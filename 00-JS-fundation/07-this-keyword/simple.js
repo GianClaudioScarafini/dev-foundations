@@ -9,6 +9,7 @@ const person = {
   name: "Alice",
   greet() {
     // your code here
+    return `Hi, I'm ${this.name}`
   }
 }
 
@@ -24,6 +25,7 @@ const user = {
   age: 28,
   describe() {
     // your code here
+    return `${this.name} is ${this.age} years old`
   }
 }
 
@@ -37,13 +39,13 @@ console.log(user.describe())  // → "Bob is 28 years old"
 
 const speaker = {
   name: "Carol",
-  greet: () => {
+  greet (){
     return `Hi, I'm ${this.name}`
   }
 }
 
-// console.log(speaker.greet())  // → "Hi, I'm undefined"
-// explanation:
+console.log(speaker.greet())  // → "Hi, I'm undefined"
+// explanation: this shoudl noe be an arrow functon but a 
 // fix:
 
 
@@ -58,11 +60,19 @@ const robot = {
   }
 }
 
-const fn = robot.identify
+// const fn = robot.identify
 // console.log(fn())  // → crashes or "I am undefined"
-// explanation:
+// explanation:The pattern to remember: detaching a method from its object loses this. bind reattaches it.
 // fix:
-
+const robot2 = {
+  model: "R2D2",
+  identify() {
+    return `I am ${this.model}`
+  }
+}
+const fn = robot2.identify
+const result = fn.bind(robot2)
+console.log(result())  // → crashes or "I am undefined"
 
 // ─────────────────────────────────────────────
 // 5. call() — borrow a method
@@ -76,6 +86,8 @@ function introduce() {
 const guest = { name: "Dave", company: "Acme" }
 
 // your code here
+
+console.log(introduce.call(guest))
 
 
 // ─────────────────────────────────────────────
@@ -93,9 +105,10 @@ const obj = {
 const standalone = obj.getValue
 const bound = obj.getValue.bind(obj)
 
-// console.log(obj.getValue())   // → ?
-// console.log(standalone())     // → ?
-// console.log(bound())          // → ?
+// console.log(obj.getValue())      // → 42
+// console.log(standalone())        // → undefined
+// console.log(bound())             // → 42
+
 
 // your predictions:
 // obj.getValue()  →
