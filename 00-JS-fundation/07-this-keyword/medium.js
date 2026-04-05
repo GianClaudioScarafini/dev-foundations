@@ -14,6 +14,8 @@ function sum(a, b, c) {
 const numbers = [1, 2, 3]
 
 // your code here — use apply
+var result = sum.apply(null, numbers)
+console.log(result)
 
 
 // ─────────────────────────────────────────────
@@ -27,12 +29,16 @@ function multiply(factor, number) {
 }
 
 // your code here
-
+console.log("// 2. bind() to create a preset function")
+const triple = multiply.bind(this,3)
+const doble = multiply.bind(this,2)
+console.log(doble(5))
+console.log(triple(5))
 
 // ─────────────────────────────────────────────
 // 3. `this` inside a class
 //    Fix the bug — the timer loses `this.name`
-
+console.log("// 3. `this` inside a class")
 class Greeter {
   constructor(name) {
     this.name = name
