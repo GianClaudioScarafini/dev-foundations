@@ -36,8 +36,8 @@ console.log(blue)
 // your code here
 console.log("// 3. Object destructuring — basic")
 const user = { name: "Alice", age: 30, city: "London" }
-const {name,age} = user
-console.log(name)
+const {name:newname,age:newage} = user
+console.log(newname)
 
 
 // ─────────────────────────────────────────────
