@@ -44,16 +44,23 @@ class Greeter {
     this.name = name
   }
 
-  delayedHi() {
-    setTimeout(function() {
-      console.log(`Hi from ${this.name}`)  // ← broken
+  delayedHi(){
+    setTimeout(()=> {
+      console.log(`Hi from ${this.name}`)  
     }, 500)
   }
 }
 
 const g = new Greeter("Alice")
 // g.delayedHi()  // → should log "Hi from Alice" after 500ms
+console.log(g)
+console.log(g.delayedHi())
 
+//personal note:
+//function() creates its own this. What this is depends on how it's called.
+//When setTimeout calls your callback, it calls it as a plain function — so this becomes undefined (or window in browsers). Not your Greeter instance.
+//An arrow function has no this of its own. It looks up this from the surrounding scope at the time it was defined — which is inside delayedHi, where this is your Greeter instance.
+//Simple rule: arrow functions borrow this from where they're written. Regular functions get a new this based on how they're called.
 
 // ─────────────────────────────────────────────
 // 4. Method passed as callback
@@ -64,9 +71,9 @@ class Printer {
   constructor(prefix) {
     this.prefix = prefix
   }
-
+  
   printAll(items) {
-    items.forEach(function(item) {
+    items.forEach((item)=> {
       console.log(`${this.prefix}: ${item}`)  // ← broken
     })
   }
@@ -74,7 +81,8 @@ class Printer {
 
 const p = new Printer("Item")
 // p.printAll(["apple", "banana"])  // → "Item: apple", "Item: banana"
-
+console.log("// 4. Method passed as callback")
+console.log(p.printAll(["apple", "banana"]))
 
 // ─────────────────────────────────────────────
 // 5. Explicit binding chain
@@ -91,6 +99,12 @@ const person = { name: "Alice", city: "Paris" }
 // with .call():
 // with .apply():
 // with .bind():
+console.log("// 5. Explicit binding chain")
+console.log(fullGreeting.apply(person))
+console.log(fullGreeting.call(person))
+let test = fullGreeting.bind(person)
+console.log(test())
+
 
 
 // ─────────────────────────────────────────────

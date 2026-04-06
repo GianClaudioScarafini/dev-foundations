@@ -11,10 +11,11 @@ const person = {
   name: "Alice",
   greet() {
     // use `this` here
+  return this.name
   }
 }
 
-// console.log(person.greet())
+console.log(person.greet())
 
 
 // ─────────────────────────────────────────────
@@ -29,8 +30,9 @@ const person2 = {
   }
 }
 
-const fn = person2.greet
-// console.log(fn())  // ← broken, fix this line only
+const fn = person2.greet.bind(person2)
+
+console.log(fn())  // ← broken, fix this line only
 
 
 // ─────────────────────────────────────────────
@@ -40,12 +42,12 @@ const fn = person2.greet
 
 const person3 = {
   name: "Alice",
-  greet: () => {
+  greet() {
     return `Hi, I'm ${this.name}`  // ← why is this broken?
   }
 }
 
-// console.log(person3.greet())  // expected: "Hi, I'm Alice"
+console.log(person3.greet())  // expected: "Hi, I'm Alice"
 
 
 // ─────────────────────────────────────────────
@@ -53,16 +55,17 @@ const person3 = {
 //    Fix this so it logs "Alice" after 1 second
 //    Hint: arrow function inside setTimeout
 
+console.log("// 4. `this` with a timer")
 const person4 = {
   name: "Alice",
   greet() {
-    setTimeout(function() {
+    setTimeout(()=>{
       console.log(this.name)  // ← broken
     }, 1000)
   }
 }
 
-// person4.greet()
+person4.greet()
 
 
 // ─────────────────────────────────────────────
@@ -77,7 +80,8 @@ function greet() {
 const user = { name: "Bob" }
 
 // your code here
-
+console.log("// 5. Explicit binding — call and apply")
+console.log(greet.call(user))
 
 // ─────────────────────────────────────────────
 // 6. bind()
@@ -85,3 +89,6 @@ const user = { name: "Bob" }
 //    so it always logs "Hi, I'm Bob" regardless of how it's called
 
 // your code here
+let boundGreet = greet.bind(user) 
+
+console.log(boundGreet)
