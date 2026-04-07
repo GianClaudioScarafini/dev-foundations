@@ -1,7 +1,9 @@
+require('dotenv').config()
 // 04 — Environment Variables — Simple
 // Goal: read, validate, and type-convert env vars correctly
 // Run with: node simple.js
 // Run with vars: PORT=4000 DEBUG=true node simple.js
+
 
 // ─────────────────────────────────────────────
 // 1. Read and convert env vars safely
@@ -31,7 +33,6 @@
 //       "postgresql://localhost:5432/myapp_dev"
 //    e) Create a .env.example file with the same keys but empty values
 
-require('dotenv').config()
 
 // your code here
 
