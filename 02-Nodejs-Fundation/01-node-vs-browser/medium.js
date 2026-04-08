@@ -18,7 +18,34 @@
 //    Tip: process.argv values are strings — remember to convert numbers.
 
 // your code here
+console.log("// 1. Build a simple CLI tool")
+var passedArg = process.argv.slice(2)
+function calculator () {
 
+  if(passedArg.length < 3){
+    console.log("you did not add all the arguments")
+  }
+  else if(['+', '-', '*', '/'].includes(passedArg[1])){
+    firstVal = Number(passedArg[0])
+    secondVal = Number(passedArg[2])
+    switch(passedArg[1]){
+      case "+":
+        console.log(firstVal + secondVal)
+        break
+      case "-":
+        console.log(firstVal - secondVal)
+        break
+      case "*":
+        console.log(firstVal * secondVal)
+        break
+      case "/":
+        console.log(firstVal / secondVal)
+        break
+    }
+  }else{
+    console.log("Unknown operator")
+  }}
+calculator()
 
 // ─────────────────────────────────────────────
 // 2. Environment detection
