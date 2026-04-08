@@ -13,7 +13,10 @@
 // Do NOT hardcode strings. Use the right Node globals.
 
 // your code here
-
+console.log(process.version)
+console.log(process.platform)
+console.log(__dirname)
+console.log(__filename)
 
 // ─────────────────────────────────────────────
 // 2. Command-line arguments
@@ -23,8 +26,12 @@
 //    Tip: the first two elements of process.argv are always Node and the file path.
 
 // your code here
+console.log("// 2. Command-line arguments")
 
-
+process.argv.forEach((val,index) => {
+    console.log(`${index}: ${val}`)
+    })
+console.log(process.argv.slice(2))
 // ─────────────────────────────────────────────
 // 3. Greet from the CLI
 //    Read the first argument the user passes.
@@ -33,8 +40,13 @@
 //    Example: `node simple.js Gian` → "Hello, Gian!"
 
 // your code here
-
-
+console.log("// 3. Greet from the CLI")
+const arg = process.argv.slice(2)
+if (arg.length == 0){
+    console.log("Hello, stranger!")
+}else{
+    console.log(`Hello, ${arg}!`)
+}
 // ─────────────────────────────────────────────
 // 4. What does NOT exist in Node?
 //    The code below would run fine in a browser.
@@ -47,7 +59,7 @@
 
 // I expect this to crash because:
 // (your answer here)
-
+// main reson is becuase the node will not have access to the DOM therefore the code will point on something that does not exist.  no documet defined no windows. 
 
 // ─────────────────────────────────────────────
 // 5. Exit codes
@@ -59,3 +71,16 @@
 //    Call it with checkAge(16) to test.
 
 // your code here
+console.log("// 5. Exit codes")
+
+function checkAge(age){
+    if (age >= 18) {
+        console.log("Access granted")
+        process.exit(0)
+    } else {
+        console.log("Access denied")
+        process.exit(1)
+    }
+}
+
+checkAge(16)
