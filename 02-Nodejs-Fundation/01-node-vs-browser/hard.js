@@ -45,3 +45,63 @@
 // - Why does Node need explicit exit() calls after setInterval, but not after synchronous code?
 
 // your code here
+
+const arg = process.argv.slice(2)
+
+function defFunction(){
+    let counter = 0
+    const interval = setInterval(()=>{
+        console.log(`[ dev ] tick ${++counter}`)
+    },1000) 
+
+    setTimeout(()=>{
+        clearInterval(interval)
+        process.exit(0)
+    },5000)
+
+}
+function benchFunction(){
+    const start = new Date()
+    const numberList = Array.from(Array(10000000).keys())
+    const Sum = numberList.reduce((a,b)=>a+b)
+    const end = new Date()
+    console.log(`[ bench ] Sum: ${Sum} — Time: ${(end-start)}ms`)
+    process.exit(0)
+
+}
+function prodFunction(){
+    console.log(`[ prod ] System info:`);
+    console.log(`platform: ${process.platform}`)
+    console.log(`version: ${process.version}`)
+    console.log(`pid: ${process.pid}`)
+    console.log(`Memory usage: ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}`)
+    process.exit(0)
+
+}
+
+function hard(){
+    const flagValue = ["dev","bench","prod"]
+    if(arg[0]=== "--mode" && flagValue.includes(arg[1])){
+        switch(arg[1]){
+            case "dev":
+                defFunction()
+            break
+            case "bench":
+                benchFunction()
+            break 
+            case "prod":
+                prodFunction()
+            break 
+        }
+    }else{
+        console.log(`Usage: node hard.js --mode <dev|prod|bench>`)
+        process.exit(1)
+    }
+}
+
+process.on('SIGINT', () => {
+    console.log('Caught interrupt — cleaning up...')
+    process.exit(0)
+})
+
+hard()
