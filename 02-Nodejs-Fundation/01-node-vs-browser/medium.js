@@ -65,10 +65,18 @@ calculator()
 //    NODE_ENV=production node medium.js
 //    NODE_ENV=test node medium.js
 
+console.log("// 2. Environment detection")
 function getEnvironment() {
   // your code here
+  if(process.env.NODE_ENV == "production"){
+    console.log('production')
+  }else if(process.env.NODE_ENV == "test"){
+    console.log('test')
+  }else{
+    console.log('development')
+  }
 }
-
+getEnvironment()
 // your startup message logic here
 
 
@@ -84,3 +92,28 @@ function getEnvironment() {
 //    Read the actual uptime from process.uptime() on each tick.
 
 // your code here
+console.log("// 3. Process uptime tracker")
+
+
+//sudocode 
+// start the settimeout (myfunction, delay)
+//myfunction will have process.uptime() using Math.flor that lot "uptine: x second" (counter)
+// after 8 second this will terminate ( i will use myfuntion to exit)
+function processUptimeTracker(){
+  const start = new Date().toISOString();
+  const stop = 8000;
+  console.log(`Server started at: ${start}`)
+
+  const interval = setInterval(()=>{
+    const  time = process.uptime()
+    console.log(`Uptime: ${Math.floor(time)} seconds`)
+  },2000);
+
+  setTimeout(() => {
+    clearInterval(interval);
+    console.log("Shutting down gracefully")
+    process.exit(0);
+    }, stop)
+}
+
+processUptimeTracker()
