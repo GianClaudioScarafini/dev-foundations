@@ -6,12 +6,16 @@
 //    Before running this, write the order you think things log.
 //    Then run it and check.
 
+
 console.log("A")
 setTimeout(() => console.log("B"), 0)
 console.log("C")
 
+
 // predicted order:
+// ACB
 // actual order:
+//ACB
 
 
 // ─────────────────────────────────────────────
@@ -19,11 +23,19 @@ console.log("C")
 //    Write `wait(ms)` that returns a promise resolving after `ms` milliseconds
 //    Then use it to log "done" after 500ms
 
+
 function wait(ms) {
   // return new Promise(...)
+  return new Promise((resolve,reject) =>{
+    setTimeout(()=>{
+        resolve()
+        reject("this is wrong");
+    },ms)
+  })
 }
 
-// wait(500).then(() => console.log("done"))
+console.log("// 2. Create a simple promise")
+wait(500).then(() => console.log("done!!!!!!!"))
 
 
 // ─────────────────────────────────────────────
@@ -36,7 +48,20 @@ function wait(ms) {
 //    divide(10, 0).catch(err => console.log(err.message))  → "Division by zero"
 
 // your code here
+function devide(a,b){
+  return new Promise((resolve,reject)=>{
+    if(b===0){
+      const err = new Error ("Devide by zero")
+      reject(err)
+    }else{
+      resolve(a/b)
+    }
+  })
+}
 
+console.log("// 3. Promise resolve and reject")
+devide(10,2).then((a) => {console.log(a)})
+devide(10, 0).catch(err => console.log(err.message))
 
 // ─────────────────────────────────────────────
 // 4. async/await basics
@@ -51,11 +76,12 @@ fakeRequest().then(data => console.log(data.name))
 
 // your async/await version:
 async function loadUser() {
+  const result = await fakeRequest()
   // your code here
+  console.log(result.name)
 }
 
-// loadUser()
-
+loadUser()
 
 // ─────────────────────────────────────────────
 // 5. Chain two promises
