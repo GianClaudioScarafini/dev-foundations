@@ -5,10 +5,7 @@
 // 1. Predict the order
 //    Before running this, write the order you think things log.
 //    Then run it and check.
-const e = new Error("something broke")
-console.log(e.name)
-console.log(e.message)
-console.log(e.stack)
+
 
 console.log("A")
 setTimeout(() => console.log("B"), 0)
