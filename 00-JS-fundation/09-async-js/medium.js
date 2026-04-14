@@ -12,7 +12,9 @@ function fetchB() { return new Promise(r => setTimeout(() => r("B"), 300)) }
 function fetchC() { return new Promise(r => setTimeout(() => r("C"), 300)) }
 
 // your code here
-
+Promise.all([fetchA(),fetchB(),fetchC()]).then((value)=>{
+  console.log(value)
+})
 
 // ─────────────────────────────────────────────
 // 2. Promise.all — fail fast
@@ -24,7 +26,11 @@ const p2 = new Promise((_, x) => setTimeout(() => x(new Error("p2 failed")), 200
 const p3 = new Promise(r => setTimeout(() => r("ok"), 300))
 
 // your code here — run all three, catch any error
-
+Promise.all([p1,p2,p3]).then((value)=>{
+  console.log(value)
+}).catch((error)=>{
+  console.error(error.message)
+})
 
 // ─────────────────────────────────────────────
 // 3. Promise.allSettled — don't fail fast
@@ -38,7 +44,9 @@ const requests = [
 ]
 
 // your code here
-
+Promise.allSettled(requests).then((result)=>{
+  result.forEach((result)=>console.log(result))
+})
 
 // ─────────────────────────────────────────────
 // 4. Promise.race

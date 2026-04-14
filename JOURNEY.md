@@ -29,3 +29,27 @@
 - `error.name` vs `error.message` — know the difference cold
 
 **Session score: ~7.5/9 average across exercises**
+
+---
+
+## 2026-04-14 — Async JS: Promise combinators (25 min)
+
+**File:** `00-JS-fundation/09-async-js/medium.js`
+
+**What was covered:**
+- `Promise.all` — parallel execution vs sequential
+- `Promise.all` fail-fast behaviour — first rejection wins
+- `Promise.allSettled` — getting all results regardless of failures
+
+**What went well:**
+- `Promise.all` parallel pattern correct on first attempt
+- `Promise.allSettled` used correctly with `forEach` to log results
+
+**Mistakes made:**
+- Used `error.name` instead of `error.message` again (same mistake as last session)
+
+**Open questions / things to revisit:**
+- `error.name` vs `error.message` — still not automatic, needs to stick
+- Exercises 4–7 still to complete (Promise.race, sequential vs parallel, real fetch, async map)
+
+**Session score: ~8/9 average across exercises**
