@@ -5,7 +5,10 @@
 // 1. Predict the order
 //    Before running this, write the order you think things log.
 //    Then run it and check.
-
+const e = new Error("something broke")
+console.log(e.name)
+console.log(e.message)
+console.log(e.stack)
 
 console.log("A")
 setTimeout(() => console.log("B"), 0)
@@ -35,7 +38,7 @@ function wait(ms) {
 }
 
 console.log("// 2. Create a simple promise")
-wait(500).then(() => console.log("done!!!!!!!"))
+wait(100).then(() => console.log("done!!!!!!!"))
 
 
 // ─────────────────────────────────────────────
@@ -90,16 +93,22 @@ loadUser()
 //    Log: "Alice scored 95"
 
 function getUser() {
-  return new Promise(resolve => setTimeout(() => resolve({ id: 1, name: "Alice" }), 200))
+  return new Promise(resolve => setTimeout(() => resolve({ id: 1, name: "Alice" }), 100))
 }
 
 function getScore(userId) {
-  return new Promise(resolve => setTimeout(() => resolve({ userId, score: 95 }), 200))
+  return new Promise(resolve => setTimeout(() => resolve({ userId, score: 95 }), 100))
 }
 
 // your code here — chain with .then() OR async/await
-
-
+async function mylog(){
+  const myUser = await getUser()
+  const scoreData = await getScore(myUser.id)
+  
+  console.log("// 5. Chain two promises")
+  console.log(`${myUser.name} scored ${scoreData.score}`)
+}
+mylog()
 // ─────────────────────────────────────────────
 // 6. try/catch with async/await
 //    This function randomly fails. Handle the error and log "Request failed: <message>"
@@ -108,15 +117,22 @@ function riskyRequest() {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       Math.random() > 0.5 ? resolve("success") : reject(new Error("server error"))
-    }, 200)
+    }, 400)
   })
 }
 
 async function safeLoad() {
-  // your code here
+  try{
+    const response = await riskyRequest()
+    console.log("// 6. try/catch with async/await")
+    console.log(response)
+  }catch (error){
+    console.log("// 6. try/catch with async/await")
+    console.log(`Request failed: ${error.message}`)
+  }
 }
 
-// safeLoad()
+safeLoad()
 
 
 // ─────────────────────────────────────────────
@@ -133,3 +149,7 @@ fetchData()
 console.log("after fetchData() call")
 
 // predicted order:
+"fetching..."
+"after fetchData() call"
+"got: data"
+
