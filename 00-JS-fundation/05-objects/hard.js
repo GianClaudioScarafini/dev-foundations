@@ -13,7 +13,33 @@
 //    console.log(original.b.c)  // → still 2
 
 // your code here
+console.log("// 1. Deep clone (no JSON.parse trick)")
 
+function deepClone(original){
+    if (typeof original !== "object" || original === null) return original
+    const result = {}
+    for (const[key,values] of Object.entries(original)){
+        if (Array.isArray(values)){
+            result[key] = values.map(item => deepClone(item))
+
+        }
+        else if (typeof(values) !== "object") {
+            result[key] =values
+            
+        } else {
+            result[key] = deepClone(values)
+        }
+    }
+    return result
+}
+
+const original = { a: 1, b: { c: 2, d: [3, 4] } }
+const clone = deepClone(original)
+console.log(original)
+clone.b.c = 99
+console.log(clone)
+
+console.log(original.b.c)  // → still 2
 
 // ─────────────────────────────────────────────
 // 2. Immutable update (nested)
@@ -22,7 +48,14 @@
 //    Expected: new object where city is "Lyon", everything else unchanged
 
 // your code here
-
+console.log("// 2. Immutable update (nested)");
+const state = { user: { name: "Alice", address: { city: "Paris" } } }
+const newstate = deepClone(state)
+const test = {...state}
+newstate.user.address.city = "Lyon"
+console.log(newstate)
+console.log(test)
+console.log(state)
 
 // ─────────────────────────────────────────────
 // 3. Flatten a nested object
@@ -31,7 +64,28 @@
 //    Expected: { a: 1, "b.c": 2, "b.d": 3, e: 4 }
 
 // your code here
+console.log("// 3. Flatten a nested object")
+function flatten(obj){
+    const result = {}
+    for (const[key,values] of Object.entries(obj)){
+        if (typeof(values) === "object") {
+            var newkey = []
+            for (const [nestedKey,nestedVal] of Object.entries(values)){
+                newkey = key + "." + nestedKey
+                result[newkey] = nestedVal
+            }
+        } else {
+            result[key] =values
+        }
+    }
+    return result
+}
+const nested = { a: 1, b: { c: 2, d: 3 }, e: 4 } //    Expected: { a: 1, "b.c": 2, "b.d": 3, e: 4 }
+console.log(nested)
+console.log(flatten(nested))
 
+
+console.log(Object.entries(nested))
 
 // ─────────────────────────────────────────────
 // 4. Object diff
@@ -42,7 +96,22 @@
 //    diff(a, b)  → { age: 31, city: "Lyon" }
 
 // your code here
+function diff(a,b){
+    result = {}
+    if (JSON.stringify(a) === JSON.stringify(b)) {
+    
+    } else {
+        
+        }
+        return result
+    }
+    
+    console.log("// 4. Object diff")
+    const a = { name: "Alice", age: 30, city: "Paris" }
+    const b = { name: "Alice", age: 30, city: "Paris" }
+    // const b = { name: "Alice", age: 31, city: "Lyon" }
 
+    console.log(JSON.stringify(a) === JSON.stringify(b))
 
 // ─────────────────────────────────────────────
 // 5. Factory function with private state
