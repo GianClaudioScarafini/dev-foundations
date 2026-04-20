@@ -1,0 +1,25 @@
+# TODO: Write your docker-compose.yml
+# Define two services: app and db
+#
+# Questions to answer before writing:
+# 1. What hostname does "app" use to reach "db"? (not localhost)
+# 2. What env vars does server.js need? (check server.js)
+# 3. How do you make init.sql run automatically in Postgres?
+# 4. How do you persist the database data across restarts?
+#
+# Structure to fill in:
+
+# services:
+#   app:
+#     build: ...
+#     ports: ...
+#     environment: ...
+#     depends_on: ...
+#
+#   db:
+#     image: postgres:15-alpine
+#     environment: ...
+#     volumes: ...
+#
+# volumes:
+#   (name your volume here)

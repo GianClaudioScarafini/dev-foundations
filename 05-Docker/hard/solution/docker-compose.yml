@@ -1,0 +1,54 @@
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"          # only nginx is exposed to the host
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - app
+    restart: unless-stopped
+
+  app:
+    build: .
+    # no "ports" — internal only, nginx is the only entry point
+    env_file: .env       # credentials stay out of compose
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    restart: unless-stopped
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: tracker
+      POSTGRES_PASSWORD: changeme
+      POSTGRES_DB: projects_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tracker -d projects_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
+
+# Task 9 — Docker secrets:
+# "docker secret create" stores secrets encrypted in swarm mode.
+# Services read them from /run/secrets/<name> at runtime — never as env vars.
+# Limitation: secrets require swarm mode (docker swarm init).
+# In plain compose, env_file + .env (gitignored) is the practical equivalent.
+# For production on Kubernetes, use k8s Secrets or a vault like HashiCorp Vault.

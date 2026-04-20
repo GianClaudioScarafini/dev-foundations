@@ -1,0 +1,32 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: db          # "db" = the service name — Docker's internal DNS
+      DB_PORT: 5432
+      DB_USER: tracker
+      DB_PASSWORD: secret
+      DB_NAME: projects_db
+    depends_on:
+      db:
+        condition: service_healthy   # Task 7: wait until postgres is ready
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: tracker
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: projects_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data          # named volume — persists data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql # auto-runs on first start
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tracker -d projects_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:   # Docker manages this — survives "docker compose down" but not "down -v"

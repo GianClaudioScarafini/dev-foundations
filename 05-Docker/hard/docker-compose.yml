@@ -1,0 +1,15 @@
+# TODO: Write docker-compose.yml with 4 services: nginx, app, db, redis
+#
+# Architecture reminder:
+#   nginx:80 (exposed) → app:3000 (internal) → db:5432 (internal)
+#                                             → redis:6379 (internal)
+#
+# Requirements checklist:
+# [ ] Only nginx has a "ports" mapping to the host
+# [ ] app uses "env_file: .env" instead of inline environment
+# [ ] db and redis have named volumes
+# [ ] app depends_on: db (healthy) and redis
+# [ ] db has a healthcheck
+# [ ] All services have "restart: unless-stopped"
+# [ ] nginx mounts ./nginx/nginx.conf into the container
+#     (look up where nginx expects its config file)
